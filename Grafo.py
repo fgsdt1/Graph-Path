@@ -130,6 +130,48 @@ class Grafo():
 
         return path
 
+    # Se implementa un algoritmo "Todas las rutas posibles entre dos puntos" adaptando el DFS para recorrer el grafo
+    # Método principal
+    def allRoutes (self, verticea, verticede=""):
+
+        # Si no se envía el vertice origen se considera el primero incluido en el diccionario
+        if verticede=="": verticede = list(self.listaVertices.keys())[0]
+        if verticea == verticede: return verticea
+
+        print ("All routes from", verticede, "to", verticea)
+        # Se crea una pila de vertices recorridos y se le incorpora el primer valor
+        # Cada vertice de la pila tendrá una lista de los posibles paths hasta el destino
+        recorridos = {}
+        for i in self.listaVertices:
+            recorridos[i] = False
+
+        # Se inicializa la lista Path donde vamos a ir poniendo el path
+        path = []
+
+        # se llama a algoritmo recursivo allRoutes para crear el camino
+        self._allRoutes (verticea, verticede, recorridos, path)
+
+
+    # Método iterativo de la implementación del algoritmo allRoutes con "Depth First Traversal"
+    def _allRoutes (self, verticea, verticede, recorridos, path):
+
+        # Marcamos el vertice actual (verticede) como visitado y lo añadimos al path
+        recorridos[verticede] = True
+        path.append(verticede)
+        # si el verticede y verticea son iguales ya tenemos un path. Lo imprimimos
+        if verticea == verticede:
+            print (path)
+        else:
+            # Recorremos todos los vertices adyacentes al actual
+            for ari in self.listaVertices[verticede].aristas.keys():
+                if recorridos[ari] == False:
+                    self._allRoutes(verticea, ari, recorridos, path)
+
+        path.pop()
+        recorridos[verticede] = False
+
+
+
     # Generación de grafo a partir de una matriz de doble entrada con distanicas/ponderaciones
     # y una lista con los nombres de los nodos
     def matrixintoGraph (self, matriz, listanodos):

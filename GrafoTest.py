@@ -33,6 +33,15 @@ print(myGrafo.shortestPath("B", "A"))
 
 print(myGrafo.dfsRoute("C"))
 
+
+# -------------------------------
+# Prueba All Routes A-B
+# -------------------------------
+
+print ("All routes")
+print (myGrafo.allRoutes("D", "A"))
+
+'''
 # -------------------------------
 # Prueba creación desde matriz
 # -------------------------------
@@ -85,3 +94,4 @@ print(myGrafo.shortestPath("B", "F"))
 print("A->H", myGrafo.shortestPath("A", "H"))
 print("H->A", myGrafo.shortestPath("H", "A"))
 print(myGrafo.shortestPath("F", "C"))
+'''
